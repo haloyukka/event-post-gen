@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Event Post Gen</title>
+<meta name="description" content="イベントページの内容から X 告知用の文面を生成します">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎟</text></svg>">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="top">
+  <h1>Event Post Gen</h1>
+  <p class="lead">イベントページの内容から、X 告知用の文面を作ります。投稿前に内容を確認してください。</p>
+</header>
+
+<main>
+  <section class="panel" aria-labelledby="in-h">
+    <h2 id="in-h" class="step"><span>1</span>入力</h2>
+
+    <label class="field">
+      <span class="field-label">イベントURL <span id="site" class="badge" hidden></span></span>
+      <input id="url" type="url" inputmode="url" autocomplete="off" placeholder="https://zaiko.io/event/…">
+    </label>
+
+    <div class="field">
+      <div class="field-row">
+        <label for="content" class="field-label">ページ内容</label>
+        <button id="paste" type="button" class="ghost small">クリップボードから貼り付け</button>
+      </div>
+      <textarea id="content" rows="8" placeholder="イベントページを開いて全選択 → コピー → ここに貼り付け"></textarea>
+      <p class="hint">ページの本文をそのまま貼り付けます。PCならページのソース（HTML）を貼ると、日時・会場の抽出精度が上がります。</p>
+    </div>
+
+    <div class="actions">
+      <label class="inline">
+        日付の書式
+        <select id="date-format"></select>
+      </label>
+      <button id="generate" type="button" class="primary">文面を生成</button>
+    </div>
+  </section>
+
+  <section id="result" class="panel" aria-labelledby="out-h" hidden>
+    <div class="field-row">
+      <h2 id="out-h" class="step"><span>2</span>文面</h2>
+      <button id="copy-all" type="button" class="ghost small">全文コピー</button>
+    </div>
+    <ul id="notes" class="notes"></ul>
+    <div id="posts" class="posts"></div>
+    <details class="json">
+      <summary>抽出結果（JSON）</summary>
+      <pre id="json"></pre>
+    </details>
+  </section>
+</main>
+
+<footer class="foot">
+  対応：ZAIKO / チケットぴあ / ローチケ ・ 入力内容はブラウザ内だけで処理され、外部に送信されません
+</footer>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
